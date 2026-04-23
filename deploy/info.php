@@ -5,7 +5,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 $app['basename'] = 'cpu_monitor';
-$app['version'] = '0.0.1';
+$app['version'] = '0.0.2';
 $app['vendor'] = 'Pro777';
 $app['packager'] = 'Pro777';
 $app['license'] = 'GPLv3';
@@ -17,8 +17,8 @@ $app['description'] = lang('cpu_monitor_description');
 /////////////////////////////////////////////////////////////////////////////
 
 $app['name'] = lang('cpu_monitor_app_name');
-$app['category'] = lang('base_category_system');
-$app['subcategory'] = lang('base_subcategory_monitoring');
+$app['category'] = lang('base_category_reports');
+$app['subcategory'] = lang('base_subcategory_performance_and_resources');
 
 /////////////////////////////////////////////////////////////////////////////
 // Dashboard Widgets

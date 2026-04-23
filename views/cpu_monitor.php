@@ -7,7 +7,8 @@ echo "<h2>" . lang('cpu_monitor_app_name') . "</h2>";
 echo "<h3>" . lang('cpu_monitor_statistics') . "</h3>";
 echo "<p><b>" . lang('cpu_monitor_processor_model') . ":</b> " . $cpu_model . "</p>";
 echo "<p><b>" . lang('cpu_monitor_number_cores') . ":</b> " . $cores . "</p>";
-echo "<p id='cpu'><b>" . lang('cpu_monitor_total_cpu_usage') . ":</b> " . lang('cpu_monitor_loading') . "</p>";
+echo "<p id='cpu_usage'><b>" . lang('cpu_monitor_total_cpu_usage') . ":</b> " . lang('cpu_monitor_loading') . "</p>";
+echo "<p id='cpu_temperature'><b>" . lang('cpu_monitor_cpu_temperature') . ":</b> " . lang('cpu_monitor_loading') . "</p>";
 echo "<h3>" . lang('cpu_monitor_usage_each_core') . "</h3>";
 echo "
 
@@ -53,11 +54,17 @@ echo "
 
 <script>
 function loadCPU() {
-    let pretext = '<b>" . lang('cpu_monitor_total_cpu_usage') . ":</b> '
+    let usage_pretext = '<b>" . lang('cpu_monitor_total_cpu_usage') . ":</b> ';
+    let temperature_pretext = '<b>" . lang('cpu_monitor_cpu_temperature') . ":</b> ';
     fetch('/app/cpu_monitor/cpu_monitor/stats')
         .then(res => res.json())
         .then(data => {
-            document.getElementById('cpu').innerHTML = pretext + Math.round(data.percent) + '%';
+            document.getElementById('cpu_usage').innerHTML = usage_pretext + Math.round(data.percent) + '%';
+	    if (data.temp) {
+		document.getElementById('cpu_temperature').innerHTML = temperature_pretext + data.temp + '°C';
+	    } else {
+		document.getElementById('cpu_temperature').innerHTML = temperature_pretext + '" . lang('cpu_monitor_no_information_found') . "';
+	    }
 
             let container = document.getElementById('bars');
             container.innerHTML = '';

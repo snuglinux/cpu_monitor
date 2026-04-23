@@ -33,6 +33,16 @@ class Cpu_monitor extends ClearOS_Controller
         return $cpus;
     }
 
+    private function getCpuTemp() {
+	$temp = @file_get_contents('/sys/class/thermal/thermal_zone0/temp');
+
+	if ($temp === false) {
+    	    return null;
+	}
+
+	return round($temp / 1000, 1); // °C
+    }
+
     function stats() {
         header('Content-Type: application/json; charset=utf-8');
 
@@ -63,12 +73,15 @@ class Cpu_monitor extends ClearOS_Controller
             $result[$label] = round($usage, 2);
         }
 
+	$temp = $this->getCpuTemp();
+
         $percentTotal = isset($result['cpu']) ? $result['cpu'] : 0;
         unset($result['cpu']);
 
         echo json_encode([
             'percent' => $percentTotal,
-            'cores'   => array_values($result)
+            'cores'   => array_values($result),
+	    'temp'    => $temp
         ]);
     }
 }
