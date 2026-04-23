@@ -1,6 +1,6 @@
 Name:           app-cpu-monitor
-Version:        0.0.1
-Release:        2%{?dist}
+Version:        0.0.2
+Release:        1%{?dist}
 Summary:        CPU monitor app for ClearOS
 
 License:        GPL-3.0-only
@@ -37,9 +37,7 @@ cp -a controllers %{buildroot}%{app_root}/
 cp -a deploy %{buildroot}%{app_root}/
 cp -a language %{buildroot}%{app_root}/
 cp -a views %{buildroot}%{app_root}/
-
-# Required for ClearOS app visibility/menu integration
-install -d %{buildroot}%{app_root}/htdocs
+cp -a htdocs %{buildroot}%{app_root}/
 
 install -d %{buildroot}/usr/share/licenses/%{name}
 install -m 0644 LICENSE %{buildroot}/usr/share/licenses/%{name}/LICENSE
@@ -61,3 +59,7 @@ install -m 0644 README.md %{buildroot}/usr/share/doc/%{name}/README.md
 
 * Thu Apr 16 2026 SnugLinux <snuglinux@ukr.net> - 0.0.1-1
 - Initial RPM package for ClearOS CPU Monitor
+
+* Thu Apr 23 2026 SnugLinux <snuglinux@ukr.net> - 0.0.2-1
+- Fixed bugs with appearance
+

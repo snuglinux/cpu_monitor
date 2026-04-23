@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-VERSION="${1:-0.0.1}"
+VERSION="${1:-0.0.2}"
 TOPDIR="${HOME}/rpmbuild"
 SPECFILE="packaging/app-cpu-monitor.spec"
 TARBALL="${TOPDIR}/SOURCES/cpu-monitor-${VERSION}.tar.gz"
